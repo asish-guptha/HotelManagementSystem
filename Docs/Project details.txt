@@ -1,0 +1,77 @@
+n=int(input("Enter Number:"))
+for i in range(n):
+    for j in range(n-i):
+        print(i+j, end='')
+    print()
+
+
+
+social media, food booking, ecommerce, flight booking
+
+
+
+destructering 
+
+array destructering
+object destructering
+
+let arr = [1,2,3,4,5,6,7]
+
+
+
+
+npx json-server --watch db.json
+
+
+
+
+Hotel Management System.
+
+      Multi-language support [optional]
+
+      	screen1: Displaying all the hotels
+
+		 Reviews & ratings 
+		 Room gallery with images
+		 Sort rooms by price
+		 Total rooms
+		 Available rooms
+
+	Screen2: Booking Page
+ 
+		Calendar view for bookings
+		Booking confirmation(POP UP)
+		Invoice Generation
+		
+		Booking Form
+		Hotel name, Room Type, Booking Dates.
+
+	Screen3: Admin 
+
+		 Search guests by name or phone
+		 Filter bookings by date
+		 Today’s check-ins, check-outs
+
+	Screen4: Login & Registration Screen4 (Admin/User)
+
+			Login Page: Username, Password
+			Registration: Name, email, password, confirm password 
+
+	Screen5: Room Adding Form
+		 Room list ( type, price, status, image)
+
+	Screen6: Hotel Registration[Optional]
+
+	Screen7: My Booking
+
+
+by Monday
+
+forms
+login page(user name, password)
+registration page(name, email, password, confirm password)
+
+
+Booking form(hotel name, room type, booking dates)
+room list(type, price, image)
+zero copy mechanism.									
