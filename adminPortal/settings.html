@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings - Nexus Admin</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="admin.css">
+</head>
+
+<body class="bg-light">
+
+    <div class="d-flex" id="wrapper">
+        <div class="bg-dark text-white p-3" style="min-width: 250px; min-height: 100vh;">
+            <h3 class="text-warning fst-italic mb-4">Tulasi Grand Admin</h3>
+            <ul class="nav flex-column gap-2">
+                <li class="nav-item">
+                    <a href="dashboard.html" class="nav-link text-white-50 hover-light"><i
+                            class="bi bi-speedometer2 me-2"></i>Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a href="inventory.html" class="nav-link text-white-50 hover-light"><i
+                            class="bi bi-houses me-2"></i>Manage Rooms</a>
+                </li>
+                <li class="nav-item">
+                    <a href="history.html" class="nav-link text-white-50 hover-light">
+                        <i class="bi bi-clock-history me-2"></i> Booking History
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="offers.html" class="nav-link text-white-50 hover-light">
+                        <i class="bi bi-tags me-2"></i> Offers & Coupons
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link active text-white bg-primary rounded"><i
+                            class="bi bi-gear me-2"></i>Settings</a>
+                </li>
+                <li class="nav-item mt-5">
+                    <button id="adminLogout" class="btn btn-outline-danger w-100 text-start">
+                        <i class="bi bi-box-arrow-left me-2"></i> Logout
+                    </button>
+                </li>
+            </ul>
+        </div>
+
+        <div class="container-fluid p-4">
+            <h2 class="mb-4">Cancellation Policy Settings</h2>
+
+            <div class="card shadow-sm border-0" style="max-width: 600px;">
+                <div class="card-body p-4">
+                    <form id="settingsForm">
+
+                        <div class="form-check form-switch mb-4">
+                            <input class="form-check-input" type="checkbox" id="cancellationEnabled"
+                                style="width: 3em; height: 1.5em;">
+                            <label class="form-check-label ms-3 mt-1 fw-bold">Allow Cancellations?</label>
+                            <div class="form-text">If disabled, users cannot cancel at all.</div>
+                        </div>
+
+                        <hr>
+
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Cancellation Rule</label>
+                            <select class="form-select" id="policyType">
+                                <option value="midnight">Default: Until Midnight Before Check-In</option>
+                                <option value="hours">Custom: X Hours Before Check-In</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-4" id="hoursInputGroup" style="display: none;">
+                            <label class="form-label">Hours Before Check-In (12:00 PM)</label>
+                            <div class="input-group">
+                                <input type="number" class="form-control" id="customHours" min="1" max="72" value="24">
+                                <span class="input-group-text">Hours</span>
+                            </div>
+                            <div class="form-text text-primary">
+                                Example: If set to 4 hours, and Check-in is 12:00 PM, they can cancel until 8:00 AM.
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-success w-100">Save Settings</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="settings.js"></script>
+</body>
+
+</html>

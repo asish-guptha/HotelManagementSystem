@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking History - Nexus Admin</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="admin.css">
+</head>
+
+<body class="bg-light">
+
+    <div class="d-flex" id="wrapper">
+        <div class="bg-dark text-white p-3" style="min-width: 250px; min-height: 100vh;">
+            <h3 class="text-warning fst-italic mb-4">Tulasi Grand Admin</h3>
+            <ul class="nav flex-column gap-2">
+                <li class="nav-item"><a href="dashboard.html" class="nav-link text-white-50 hover-light"><i
+                            class="bi bi-speedometer2 me-2"></i>Dashboard</a>
+                </li>
+                <li class="nav-item"><a href="inventory.html" class="nav-link text-white-50 hover-light"><i
+                            class="bi bi-houses me-2"></i>Manage
+                        Rooms</a></li>
+                <li class="nav-item"><a href="#" class="nav-link active text-white bg-primary rounded"><i class="bi bi-clock-history me-2"></i>Booking
+                        History</a></li>
+                <li class="nav-item"><a href="offers.html" class="nav-link text-white-50 hover-light"><i
+                            class="bi bi-tags me-2"></i>Offers &
+                        Coupons</a></li>
+                <li class="nav-item"><a href="settings.html" class="nav-link text-white-50 hover-light"><i
+                            class="bi bi-gear me-2"></i>Settings</a>
+                </li>
+                <li class="nav-item mt-5">
+                    <button id="adminLogout" class="btn btn-outline-danger w-100 text-start">
+                        <i class="bi bi-box-arrow-left me-2"></i> Logout
+                    </button>
+                </li>
+            </ul>
+        </div>
+
+        <div class="container-fluid p-4">
+            <h2 class="mb-4">Booking Archives</h2>
+
+            <div class="card shadow-sm border-0 mb-4">
+                <div class="card-body">
+                    <form id="filterForm" class="row g-3">
+                        <div class="col-md-3">
+                            <label class="form-label small fw-bold text-muted">Search Guest / ID</label>
+                            <input type="text" class="form-control" id="searchQuery" placeholder="e.g. John or #123">
+                        </div>
+
+                        <div class="col-md-2">
+                            <label class="form-label small fw-bold text-muted">Status</label>
+                            <select class="form-select" id="filterStatus">
+                                <option value="All">All Status</option>
+                                <option value="Completed">Completed</option>
+                                <option value="Cancelled">Cancelled</option>
+                                <option value="Active">Active</option>
+                                <option value="Confirmed">Confirmed</option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-3">
+                            <label class="form-label small fw-bold text-muted">From Date</label>
+                            <input type="date" class="form-control" id="filterStart">
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label small fw-bold text-muted">To Date</label>
+                            <input type="date" class="form-control" id="filterEnd">
+                        </div>
+
+                        <div class="col-md-1 d-flex align-items-end">
+                            <button type="button" class="btn btn-outline-secondary w-100" onclick="resetFilters()">
+                                <i class="bi bi-arrow-counterclockwise"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="card shadow-sm border-0">
+                <div class="card-body p-0">
+                    <table class="table table-hover align-middle mb-0">
+                        <thead class="table-light">
+                            <tr>
+                                <th class="ps-4">ID</th>
+                                <th>Guest Details</th>
+                                <th>Room</th>
+                                <th>Dates</th>
+                                <th>Amount</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="historyTableBody">
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card-footer bg-white text-muted small" id="resultCount">
+                    Showing all records
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="history.js"></script>
+</body>
+
+</html>

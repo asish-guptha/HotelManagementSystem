@@ -3,67 +3,244 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home - Nexus Hotels</title>
+    <title>Nexus Hotels - Luxury Stay</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../navbar/navbar.css">
-    </head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="homePage.css">
+</head>
 <body class="bg-light">
 
-    <nav class="nav_container w-100"></nav>
-
-    <div class="container mt-5">
-        <h2 class="text-center mb-4 fw-bold">Explore Our Luxury Rooms</h2>
-        
-        <div class="row g-4 room_container">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top shadow-sm">
+        <div class="container">
+            <a class="navbar-brand fw-bold text-warning fs-4" href="homePage.html">
+                <i class="bi bi-building-fill-check me-2"></i>Tulasi Grand
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link active" href="homePage.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="aboutUs.html">About Us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contactUs.html">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../myBookings/myBookings.html">My Bookings</a></li>
+                </ul>
+                
+                <div class="d-flex gap-2" id="authSection">
+                    <a href="../autentication forms/login.html" class="btn btn-outline-light btn-sm">Login</a>
+                    <a href="../autentication forms/register.html" class="btn btn-warning btn-sm">Sign Up</a>
+                </div>
             </div>
-    </div>
+        </div>
+    </nav>
+
+    <header class="bg-primary text-white text-center py-5 mb-4" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1920&q=80'); background-size: cover; background-position: center;">
+        <div class="container py-5">
+            <h1 class="display-4 fw-bold">Find Your Perfect Escape</h1>
+            <p class="lead mb-4">Luxury rooms, premium amenities, and unforgettable experiences.</p>
+            
+            <div class="card p-4 border-0 shadow-lg mx-auto" style="max-width: 800px; background: rgba(255, 255, 255, 0.95);">
+                <form id="searchForm" class="row g-3 align-items-end text-start text-dark">
+                    <div class="col-md-5">
+                        <label class="form-label fw-bold small text-uppercase">Check-in</label>
+                        <input type="date" class="form-control" id="searchCheckIn" required>
+                    </div>
+                    <div class="col-md-5">
+                        <label class="form-label fw-bold small text-uppercase">Check-out</label>
+                        <input type="date" class="form-control" id="searchCheckOut" required>
+                    </div>
+                    <div class="col-md-2">
+                        <button type="submit" class="btn btn-dark w-100 fw-bold py-2">
+                            <i class="bi bi-search"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </header>
+
+    <section class="container my-5">
+        <div class="row">
+            
+            <div class="col-lg-3 mb-4">
+                <div class="card shadow-sm border-0 p-4 sticky-top" style="top: 90px; z-index: 1;">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h5 class="fw-bold mb-0 text-dark"><i class="bi bi-funnel me-2"></i>Filters</h5>
+                        <button class="btn btn-link text-decoration-none btn-sm p-0" onclick="resetFilters()">Reset</button>
+                    </div>
+                    
+                    <hr class="text-muted my-2">
+
+                    <div class="mb-4 mt-3">
+                        <label class="form-label fw-bold small text-muted d-flex justify-content-between">
+                            Max Price: <span id="priceValue" class="text-primary fw-bold">$5000</span>
+                        </label>
+                        <input type="range" class="form-range" id="priceRange" min="100" max="5000" step="50" value="5000">
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="fw-bold small text-muted mb-2 text-uppercase">Amenities</label>
+                        
+                        <div class="form-check mb-2">
+                            <input class="form-check-input amenity-filter" type="checkbox" value="WiFi" id="filterWifi">
+                            <label class="form-check-label" for="filterWifi"><i class="bi bi-wifi me-2"></i>Free WiFi</label>
+                        </div>
+                        
+                        <div class="form-check mb-2">
+                            <input class="form-check-input amenity-filter" type="checkbox" value="Pool" id="filterPool">
+                            <label class="form-check-label" for="filterPool"><i class="bi bi-water me-2"></i>Pool Access</label>
+                        </div>
+                        
+                        <div class="form-check mb-2">
+                            <input class="form-check-input amenity-filter" type="checkbox" value="AC" id="filterAC">
+                            <label class="form-check-label" for="filterAC"><i class="bi bi-snow2 me-2"></i>AC</label>
+                        </div>
+                        
+                        <div class="form-check mb-2">
+                            <input class="form-check-input amenity-filter" type="checkbox" value="Breakfast" id="filterBreakfast">
+                            <label class="form-check-label" for="filterBreakfast"><i class="bi bi-cup-hot-fill me-2"></i>Breakfast</label>
+                        </div>
+
+                        <div class="form-check mb-2">
+                            <input class="form-check-input amenity-filter" type="checkbox" value="TV" id="filterTV">
+                            <label class="form-check-label" for="filterTV"><i class="bi bi-tv me-2"></i>Smart TV</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-9">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h4 class="fw-bold text-dark mb-0">Available Rooms</h4>
+                    <span class="badge bg-light text-dark border" id="resultCount">Showing all rooms</span>
+                </div>
+                
+                <div class="row g-4" id="roomsGrid">
+                    <div class="text-center py-5">
+                        <div class="spinner-border text-primary" role="status"></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
 
     <div class="modal fade" id="bookingModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header bg-primary text-white">
-                    <h5 class="modal-title">Confirm Booking</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div class="modal-content border-0 shadow">
+                <div class="modal-header bg-dark text-white">
+                    <h5 class="modal-title fw-bold">Complete Your Booking</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                 </div>
-                
-                <div class="modal-body">
-                    <div class="alert alert-light border mb-3">
-                        <h6 class="fw-bold text-primary mb-2"><i class="bi bi-info-circle"></i> Room Details</h6>
-                        <div id="modalRoomDetails">
-                            </div>
-                    </div>
+                <div class="modal-body p-4">
+                    
+                    <div id="loginWarning"></div>
 
                     <form id="bookingForm">
-                        <input type="hidden" id="hiddenRoomNo">
                         <input type="hidden" id="hiddenRoomType">
                         <input type="hidden" id="hiddenRoomPrice">
 
+                        <div class="d-flex justify-content-between align-items-center mb-4 p-3 bg-light rounded">
+                            <div id="modalRoomDetails" class="fw-bold text-primary"></div>
+                        </div>
+
                         <div class="mb-3">
-                            <label class="form-label">Guest Name</label>
-                            <input type="text" name="name" class="form-control" placeholder="Enter full name" required>
+                            <label class="form-label fw-bold small text-muted">Guest Name</label>
+                            <input type="text" class="form-control" name="userName" id="guestName" required>
                         </div>
-                        <div class="row">
-                            <div class="col-6 mb-3">
-                                <label class="form-label">Check-In</label>
-                                <input type="date" name="checkIn" class="form-control" required>
+
+                        <div class="row mb-3">
+                            <div class="col-6">
+                                <label class="form-label fw-bold small text-muted">Check-in</label>
+                                <input type="date" class="form-control" id="checkIn" name="checkIn" required>
                             </div>
-                            <div class="col-6 mb-3">
-                                <label class="form-label">Check-Out</label>
-                                <input type="date" name="checkOut" class="form-control" required>
+                            <div class="col-6">
+                                <label class="form-label fw-bold small text-muted">Check-out</label>
+                                <input type="date" class="form-control" id="checkOut" name="checkOut" required>
                             </div>
                         </div>
-                        
-                        <div class="d-grid">
-                            <button type="submit" class="btn btn-success btn-lg">Confirm & Pay</button>
+
+                        <div class="mb-3">
+                            <label class="form-label fw-bold small text-muted">Coupon Code</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="couponInput" placeholder="Enter code">
+                                <button class="btn btn-outline-secondary" type="button" id="applyCouponBtn">Apply</button>
+                            </div>
+                            <small id="couponMessage" class="form-text text-muted"></small>
                         </div>
+
+                        <div id="priceDisplay" class="alert alert-success d-flex justify-content-between align-items-center mb-3" style="display: none !important;">
+                            <div>
+                                <small class="d-block text-muted" id="durationText">0 Nights</small>
+                                <span class="fw-bold">Total Price:</span>
+                            </div>
+                            <h3 class="fw-bold mb-0" id="totalPriceText">$0</h3>
+                        </div>
+
+                        <button type="submit" class="btn btn-dark w-100 py-2 fw-bold">Confirm Booking</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
 
+    <footer class="bg-dark text-white pt-5 pb-4 mt-5">
+        <div class="container text-center text-md-start">
+            <div class="row text-center text-md-start">
+                <div class="col-md-3 mx-auto mt-3">
+                    <h5 class="text-uppercase mb-4 fw-bold text-warning">Tulasi Grand</h5>
+                    <p>Experience luxury and comfort in the heart of the city.</p>
+                </div>
+                <div class="col-md-2 mx-auto mt-3">
+                    <h5 class="text-uppercase mb-4 fw-bold text-warning">Links</h5>
+                    <p><a href="homePage.html" class="text-white text-decoration-none">Home</a></p>
+                    <p><a href="aboutUs.html" class="text-white text-decoration-none">About</a></p>
+                    <p><a href="contactUs.html" class="text-white text-decoration-none">Contact</a></p>
+                </div>
+                <div class="col-md-4 mx-auto mt-3">
+                    <h5 class="text-uppercase mb-4 fw-bold text-warning">Contact</h5>
+                    <p><i class="bi bi-house-door-fill me-2"></i> 123 Main St, Hyderabad</p>
+                    <p><i class="bi bi-envelope-fill me-2"></i> info@tulasigrand.com</p>
+                </div>
+            </div>
+            <hr class="mb-4">
+            <div class="row align-items-center">
+                <div class="col-md-7 col-lg-8">
+                    <p>© 2026 <strong>Tulasi Grand Hotels</strong>. All Rights Reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../navbar/navbar.js"></script> 
-    <script src="./homePage.js"></script>
+    <script src="homePage.js"></script>
+
+    <script>
+        // Check Login State for Navbar
+        const authSection = document.getElementById("authSection");
+        const userName = localStorage.getItem("name");
+        const isLoggedIn = localStorage.getItem("id");
+
+        if (isLoggedIn && userName) {
+            authSection.innerHTML = `
+                <div class="dropdown">
+                    <button class="btn btn-outline-light btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                        <i class="bi bi-person-circle me-1"></i> ${userName}
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item" href="../userDashboard/myBookings.html">My Bookings</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><button class="dropdown-item text-danger" onclick="logout()">Logout</button></li>
+                    </ul>
+                </div>
+            `;
+        }
+        function logout() {
+            if(confirm("Logout?")) {
+                localStorage.clear();
+                window.location.reload();
+            }
+        }
+    </script>
 </body>
 </html>

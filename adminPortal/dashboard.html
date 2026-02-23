@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Nexus</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="admin.css">
+</head>
+
+<body class="bg-light">
+
+    <div class="d-flex" id="wrapper">
+        <div class="bg-dark text-white p-3" style="min-width: 250px; min-height: 100vh;">
+            <h3 class="text-warning fst-italic mb-4">Tulasi Grand Admin</h3>
+            <ul class="nav flex-column gap-2">
+                <li class="nav-item"><a href="#" class="nav-link active text-white bg-primary rounded"><i
+                            class="bi bi-speedometer2 me-2"></i> Dashboard</a></li>
+                <li class="nav-item"><a href="inventory.html" class="nav-link text-white-50 hover-light"><i
+                            class="bi bi-houses me-2"></i> Manage Rooms</a></li>
+                <li class="nav-item">
+                    <a href="history.html" class="nav-link text-white-50 hover-light">
+                        <i class="bi bi-clock-history me-2"></i> Booking History
+                    </a>
+                </li>
+                <li class="nav-item"><a href="offers.html" class="nav-link text-white-50 hover-light"><i
+                            class="bi bi-tags me-2"></i> Offers & Coupons</a></li>
+                <li class="nav-item"><a href="settings.html" class="nav-link text-white-50 hover-light"><i
+                            class="bi bi-gear me-2"></i> Settings</a></li>
+                <li class="nav-item mt-5">
+                    <button id="adminLogout" class="btn btn-outline-danger w-100 text-start"><i
+                            class="bi bi-box-arrow-left me-2"></i> Logout</button>
+                </li>
+            </ul>
+        </div>
+
+        <div class="container-fluid p-4">
+            <h2 class="mb-4">Live Overview</h2>
+
+            <div class="d-flex justify-content-between align-items-center mb-4 bg-white p-3 rounded shadow-sm">
+                <div class="d-flex align-items-center gap-3">
+                    <h5 class="mb-0 text-muted">Viewing Date:</h5>
+                    <input type="date" id="dashboardDate" class="form-control border-primary"
+                        style="width: auto; font-weight: bold;">
+                    <button class="btn btn-outline-primary btn-sm" onclick="resetToToday()">Today</button>
+                </div>
+
+                <button class="btn btn-primary fw-bold" data-bs-toggle="modal" data-bs-target="#offlineBookingModal">
+                    <i class="bi bi-plus-circle me-2"></i> New Offline Booking
+                </button>
+            </div>
+
+            <div class="row g-3 mb-4">
+                <div class="col-md-3">
+                    <div class="card p-3 border-0 shadow-sm border-start border-primary border-4 h-100">
+                        <p class="text-muted mb-1">Total Rooms</p>
+                        <h3 class="fw-bold" id="totalRooms">0</h3>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card p-3 border-0 shadow-sm border-start border-success border-4 h-100">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <p class="text-muted mb-1">Available on Date</p>
+                            <small class="text-primary fw-bold" id="currentDateDisplay"
+                                style="font-size: 0.75rem;">--</small>
+                        </div>
+                        <h3 class="fw-bold text-success" id="availableRooms">0</h3>
+                        <div class="mt-2">
+                            <small class="text-muted d-block mb-1" style="font-size: 0.75rem;">Free Rooms:</small>
+                            <div id="freeRoomList" class="d-flex flex-wrap gap-1"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card p-3 border-0 shadow-sm border-start border-warning border-4 h-100">
+                        <p class="text-muted mb-1">Occupied on Date</p>
+                        <h3 class="fw-bold text-warning" id="activeBookings">0</h3>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card p-3 border-0 shadow-sm border-start border-info border-4 h-100">
+                        <p class="text-muted mb-1">Total Lifetime Revenue</p>
+                        <h3 class="fw-bold" id="totalRevenue">$0</h3>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card shadow-sm border-0">
+                <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">Bookings</h5>
+                    <small class="text-muted">Showing guests for <span id="tableDateDisplay"
+                            class="fw-bold text-primary">Today</span></small>
+                </div>
+                <div class="card-body">
+                    <table class="table table-hover align-middle">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Booking ID</th>
+                                <th>Guest</th>
+                                <th>Room</th>
+                                <th>Duration</th>
+                                <th>Status</th>
+                                <th class="text-end" style="min-width: 180px;">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="recentBookingsTable">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="offlineBookingModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title"><i class="bi bi-journal-plus me-2"></i>Manual Walk-in Booking</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="offlineBookingForm">
+
+                        <div class="row mb-3">
+                            <div class="col-6">
+                                <label class="form-label fw-bold small text-muted">Check In</label>
+                                <input type="date" class="form-control" id="offCheckIn" name="checkIn" required>
+                            </div>
+                            <div class="col-6">
+                                <label class="form-label fw-bold small text-muted">Check Out</label>
+                                <input type="date" class="form-control" id="offCheckOut" name="checkOut" required>
+                            </div>
+                        </div>
+
+                        <hr class="text-muted">
+
+                        <div class="row mb-3">
+                            <div class="col-6">
+                                <label class="form-label fw-bold">Room Type</label>
+                                <select class="form-select" id="offRoomType" name="roomType" disabled required>
+                                    <option value="" selected>Select Dates First</option>
+                                </select>
+                            </div>
+                            <div class="col-6">
+                                <label class="form-label fw-bold">Room No</label>
+                                <select class="form-select" id="offRoomNo" name="roomNo" disabled required>
+                                    <option value="" selected>-</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Guest Name</label>
+                            <input type="text" class="form-control" name="guestName" placeholder="John Doe" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Total Price ($)</label>
+                            <input type="number" class="form-control" id="offPrice" name="price" required>
+                            <div class="form-text">Auto-filled based on room price (Editable).</div>
+                        </div>
+
+                        <button type="submit" class="btn btn-success w-100 fw-bold py-2">
+                            <i class="bi bi-check-lg me-2"></i> Confirm Booking
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="serviceModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-warning text-dark">
+                    <h5 class="modal-title"><i class="bi bi-receipt me-2"></i>Add Room Service Charge</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="serviceForm">
+                        <input type="hidden" id="serviceBookingId">
+                        <input type="hidden" id="serviceRoomNo">
+
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Room Number</label>
+                            <input type="text" class="form-control" id="serviceRoomDisplay" disabled>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Service / Item Description</label>
+                            <select class="form-select" name="serviceItem" id="serviceItemSelect"
+                                onchange="checkCustomService(this)">
+                                <option value="Breakfast">Breakfast ($15)</option>
+                                <option value="Lunch">Lunch ($25)</option>
+                                <option value="Dinner">Dinner ($30)</option>
+                                <option value="Extra Bed">Extra Bed ($50)</option>
+                                <option value="Laundry">Laundry ($10)</option>
+                                <option value="Custom">Other (Custom Amount)</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3 d-none" id="customServiceDiv">
+                            <label class="form-label small text-muted">Item Name</label>
+                            <input type="text" class="form-control mb-2" id="customItemName"
+                                placeholder="e.g. Broken Glass Fee">
+                            <label class="form-label small text-muted">Cost ($)</label>
+                            <input type="number" class="form-control" id="customItemCost" placeholder="0.00">
+                        </div>
+
+                        <button type="submit" class="btn btn-dark w-100 fw-bold">Add Charge to Bill</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="dashboard.js"></script>
+</body>
+
+</html>

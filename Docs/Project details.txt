@@ -74,4 +74,11 @@ registration page(name, email, password, confirm password)
 
 Booking form(hotel name, room type, booking dates)
 room list(type, price, image)
-zero copy mechanism.									
+zero copy mechanism.				
+
+footer, contact us, about us
+
+price range is calculating only then main price , even i provided the offer, when offer is available the price range filter should only consider the final price after discount.
+
+manual bookin isn't working properly, user booking also
+room deals is alsoreloading immediately after adding the deal.

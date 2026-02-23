@@ -47,19 +47,28 @@
   border-bottom: 2px solid orange;
 }
 
+/* Ensure the orange line NEVER appears on the logout item */
 .nav_container .logout:hover {
-  border-bottom: none;
+    border-bottom: none !important;
 }
 
+/* Default State: Clean, Red Outline, Transparent Background */
 .logout_button {
-  padding: 10px 15px;
-  font-size: 20px;
-  border-radius: 20px;
+    padding: 8px 20px;
+    font-size: 18px;
+    font-weight: 600;
+    border-radius: 20px;
+    background-color: transparent; /* Normal Background */
+    border: 2px solid #dc3545;     /* Red Border */
+    color: #dc3545;                /* Red Text */
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
 
+/* Hover State: Red Background, White Text */
 .logout_button:hover {
-  background-color: red;
-  color: white;
+    background-color: #dc3545;     /* Alert Color */
+    color: white;
 }
 
 #logo {

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Offers & Coupons - Nexus Admin</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="admin.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+</head>
+
+<body class="bg-light">
+
+    <div class="d-flex" id="wrapper">
+        <div class="bg-dark text-white p-3" style="min-width: 250px; min-height: 100vh;">
+            <h3 class="text-warning fst-italic mb-4">Tulasi Grand Admin</h3>
+            <ul class="nav flex-column gap-2">
+                <li class="nav-item"><a href="dashboard.html" class="nav-link text-white-50 hover-light"><i
+                            class="bi bi-speedometer2 me-2"></i>Dashboard</a>
+                </li>
+                <li class="nav-item"><a href="inventory.html" class="nav-link text-white-50 hover-light"><i
+                            class="bi bi-houses me-2"></i>Manage
+                        Rooms</a></li>
+                <li class="nav-item">
+                    <a href="history.html" class="nav-link text-white-50 hover-light">
+                        <i class="bi bi-clock-history me-2"></i> Booking History
+                    </a>
+                </li>
+                <li class="nav-item"><a href="#" class="nav-link active text-white bg-primary rounded"><i
+                            class="bi bi-tags me-2"></i>Offers &
+                        Coupons</a></li>
+                <li class="nav-item"><a href="settings.html" class="nav-link text-white-50 hover-light"><i
+                            class="bi bi-gear me-2"></i>Settings</a>
+                </li>
+                <li class="nav-item mt-5">
+                    <button id="adminLogout" class="btn btn-outline-danger w-100 text-start">
+                        <i class="bi bi-box-arrow-left me-2"></i> Logout
+                    </button>
+                </li>
+            </ul>
+        </div>
+
+        <div class="container-fluid p-4">
+            <h2 class="mb-4">Marketing Center</h2>
+
+            <ul class="nav nav-tabs mb-4" id="marketingTab" role="tablist">
+                <li class="nav-item">
+                    <button class="nav-link active fw-bold" id="coupons-tab" data-bs-toggle="tab"
+                        data-bs-target="#coupons-pane">
+                        <i class="bi bi-ticket-perforated"></i> Coupon Codes
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-link fw-bold" id="offers-tab" data-bs-toggle="tab" data-bs-target="#offers-pane">
+                        <i class="bi bi-tag"></i> Room Deals
+                    </button>
+                </li>
+            </ul>
+
+            <div class="tab-content">
+                <div class="tab-pane fade show active" id="coupons-pane">
+                    <div class="card shadow-sm border-0 mb-4">
+                        <div class="card-body">
+                            <h5 class="card-title mb-3">Create New Coupon</h5>
+                            <form id="couponForm" class="row g-3">
+                                <div class="col-md-3">
+                                    <label class="form-label small text-muted">Coupon Code</label>
+                                    <input type="text" class="form-control" id="couponCode" placeholder="e.g. WINTER20"
+                                        required style="text-transform: uppercase;">
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="form-label small text-muted">Discount %</label>
+                                    <input type="number" class="form-control" id="couponDiscount" min="1" max="100"
+                                        required>
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="form-label small text-muted">Start Date</label>
+                                    <input type="date" class="form-control" id="startDate" required>
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="form-label small text-muted">End Date</label>
+                                    <input type="date" class="form-control" id="endDate" required>
+                                </div>
+                                <div class="col-md-1 d-flex align-items-end">
+                                    <button type="submit" class="btn btn-primary w-100"><i
+                                            class="bi bi-plus-lg"></i></button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="row" id="couponsList"></div>
+                </div>
+
+                <div class="tab-pane fade" id="offers-pane">
+                    <div class="alert alert-info border-0 shadow-sm">
+                        <i class="bi bi-info-circle-fill me-2"></i>
+                        These offers automatically slash the prices on the Home Page. No code required.
+                    </div>
+
+                    <div class="card shadow-sm border-0 mb-4">
+                        <div class="card-body">
+                            <h5 class="card-title mb-3">Set Room Discount</h5>
+                            <form id="offerForm" class="row g-3 align-items-end">
+                                <div class="col-md-4">
+                                    <label class="form-label">Room Type</label>
+                                    <select class="form-select" id="offerRoomType">
+                                        <option value="Deluxe Room">Deluxe Room</option>
+                                        <option value="Suite">Suite</option>
+                                        <option value="Double Room">Double Room</option>
+                                        <option value="Single Room">Single Room</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="form-label">Discount Percentage</label>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" id="offerPercent" min="1" max="90"
+                                            required>
+                                        <span class="input-group-text">% OFF</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="form-label">Sale Title</label>
+                                    <input type="text" class="form-control" id="offerTitle"
+                                        placeholder="e.g. Weekend Flash Sale" required>
+                                </div>
+                                <div class="col-md-2">
+                                    <button type="submit" class="btn btn-success w-100">Activate Deal</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="row" id="offersList"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="offers.js"></script>
+</body>
+
+</html>
